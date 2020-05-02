@@ -48,3 +48,7 @@ body {
 .box5{
   background-color: #48c774;
 }
+
+li {
+  display: inline;
+}
