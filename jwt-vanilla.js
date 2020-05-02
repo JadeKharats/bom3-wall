@@ -16,7 +16,7 @@ function getToken() {
       if (responseObject.token) {
         tokenElement.innerHTML = "Token received";
         localStorage.setItem('token', responseObject.token);
-        getMoods();
+        setInterval(getMoods, 3000)
       } else {
         tokenElement.innerHTML = "No token received";
       }
@@ -29,7 +29,6 @@ function getToken() {
     xhr.send(sendObject);
   }
 
-setInterval(getMoods, 3000)
 
 function getMoods() {
 
