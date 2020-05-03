@@ -1,5 +1,5 @@
 body {
-  margin: 40px;
+  margin: 30px;
   background-image: url("/cube.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;  
@@ -127,4 +127,9 @@ button:hover {
 
 .hidden {
   display: none;
+}
+
+.logout-btn{
+  width: 100%;
+  margin: 15px auto;
 }

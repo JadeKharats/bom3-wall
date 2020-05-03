@@ -6,6 +6,7 @@ function getToken() {
     var platformElement = document.getElementById('platform');
     var errorElement = document.getElementById('error');
     var loginElement = document.getElementById('login');
+    var logoutElement = document.getElementById('logout');
     var user = userElement.value;
     var password = passwordElement.value;
     var platform = platformElement.value;
@@ -22,6 +23,7 @@ function getToken() {
       if (responseObject.token) {
         localStorage.setItem('token', responseObject.token);
         loginElement.classList.add("hidden");
+        logoutElement.classList.remove("hidden");
         // getMoods();
         setInterval(getMoods, 3000);        
       } else {
@@ -80,4 +82,9 @@ function getMoods() {
     box.appendChild(content);
 
     wrapperElement.insertBefore(box, wrapperElement.firstChild);  
+  }
+
+  function logout(){
+    localStorage.clear();
+    location.reload();
   }
