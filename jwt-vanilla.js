@@ -6,7 +6,6 @@ function login() {
   xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
   xhr.addEventListener('load', function() {
     var responseObject = JSON.parse(this.response);
-    console.log(responseObject);
     if (responseObject.token) {
       successLogin(responseObject.token);        
     } else {
