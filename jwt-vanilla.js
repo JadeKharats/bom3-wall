@@ -1,3 +1,5 @@
+var interval;
+
 function login() {
   var xhr = new XMLHttpRequest();
   xhr.open('POST', getLoginUrl(), true);
@@ -69,7 +71,6 @@ function successLogin(token) {
   localStorage.setItem('token', token);
   hiddenLogin();
   getMoods();
-  // setInterval(getMoods, 3000);
 }
 
 function failLogin() {
@@ -98,4 +99,13 @@ function getMoodsUrl() {
 function clearWrapper() {
   var wrapperElement = document.getElementById('wrapper');
   wrapperElement.innerHTML="";
+}
+
+function autoReload(){
+  stopReload();
+  window.interval = setInterval(getMoods, 3000);
+}
+
+function stopReload(){
+  clearInterval(window.interval);
 }
