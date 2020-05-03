@@ -23,9 +23,15 @@ function failLogin() {
   errorElement.innerHTML = "No token received";
 }
 
+function errorLogin() {
+  var errorElement = document.getElementById("error");
+  errorElement.innerHTML = "Plateforme non joignable";
+}
+
 function jsonLoginObject(){
   var user = document.getElementById("username").value;
   var password = document.getElementById("password").value;
+  document.getElementById("password").value = "";
   return JSON.stringify({user:{email: user, password: password}});
 }
 
@@ -89,6 +95,9 @@ function login() {
       failLogin();      
     }
   });
+  xhr.addEventListener("error", function(){
+    errorLogin();
+  })
   var sendObject = jsonLoginObject();
   xhr.send(sendObject);
 }
