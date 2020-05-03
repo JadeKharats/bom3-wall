@@ -1,6 +1,6 @@
 body {
   margin: 30px;
-  background-image: url("/cube.jpg");
+  background-image: url("/resized-cube.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;  
   background-size: cover;
