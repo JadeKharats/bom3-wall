@@ -6,43 +6,43 @@ function logout(){
 }
 
 function hiddenLogin() {
-  var loginElement = document.getElementById('login');
-  var logoutElement = document.getElementById('logout');
+  var loginElement = document.getElementById("login");
+  var logoutElement = document.getElementById("logout");
   loginElement.classList.add("hidden");
   logoutElement.classList.remove("hidden");
 }
 
 function successLogin(token) {
-  localStorage.setItem('token', token);
+  localStorage.setItem("token", token);
   hiddenLogin();
   getMoods();
 }
 
 function failLogin() {
-  var errorElement = document.getElementById('error');
+  var errorElement = document.getElementById("error");
   errorElement.innerHTML = "No token received";
 }
 
 function jsonLoginObject(){
-  var user = document.getElementById('username').value;
-  var password = document.getElementById('password').value;
+  var user = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
   return JSON.stringify({user:{email: user, password: password}});
 }
 
 function getLoginUrl() {
-  var platform = document.getElementById('platform').value;
-  localStorage.setItem('bom_url', platform);
+  var platform = document.getElementById("platform").value;
+  localStorage.setItem("bom_url", platform);
   var loginUrl = platform + "/api/sign_ins";
   return loginUrl;
 }
 
 function getMoodsUrl() {
-  var MoodUrl = localStorage.getItem('bom_url') + "/api/moods";
+  var MoodUrl = localStorage.getItem("bom_url") + "/api/moods";
   return MoodUrl;
 }
 
 function clearWrapper() {
-  var wrapperElement = document.getElementById('wrapper');
+  var wrapperElement = document.getElementById("wrapper");
   wrapperElement.innerHTML="";
 }
 
@@ -58,9 +58,9 @@ function stopReload(){
 
 function login() {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', getLoginUrl(), true);
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-  xhr.addEventListener('load', function() {
+  xhr.open("POST", getLoginUrl(), true);
+  xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+  xhr.addEventListener("load", function() {
     var responseObject = JSON.parse(this.response);
     if (responseObject.token) {
       successLogin(responseObject.token);        
@@ -74,9 +74,9 @@ function login() {
 
 function getMoods() {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', getMoodsUrl(), true);
-  xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'));
-  xhr.addEventListener('load', function() {
+  xhr.open("GET", getMoodsUrl(), true);
+  xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+  xhr.addEventListener("load", function() {
     var responseObject = JSON.parse(this.response);
     clearWrapper();
     responseObject.forEach(function(item,i){
@@ -88,7 +88,7 @@ function getMoods() {
 
 
   function addTimeCard(item) {
-    var wrapperElement = document.getElementById('wrapper');
+    var wrapperElement = document.getElementById("wrapper");
     var box = document.createElement("div");
     var content = document.createElement("div");
     var user = document.createElement("h4");
