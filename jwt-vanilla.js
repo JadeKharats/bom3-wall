@@ -1,5 +1,4 @@
 function login() {
-
   var xhr = new XMLHttpRequest();
   xhr.open('POST', getLoginUrl(), true);
   xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -18,7 +17,6 @@ function login() {
 
 function getMoods() {
   var xhr = new XMLHttpRequest();
-    
   xhr.open('GET', getMoodsUrl(), true);
   xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'));
   xhr.addEventListener('load', function() {
