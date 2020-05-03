@@ -6,18 +6,18 @@
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <ul class="nav-links">
-          <li class="nav-item"><label for="username">user name:</label><input id="username"></li>
-          <li class="nav-item"><label for="password">password:</label><input type="password" id="password"></li>
-          <li class="nav-item"><button onclick="getToken()">login</button></li>
-        </ul>
-      </nav>
-    <div id="token"></div>
-    <div class="wrapper" id="wrapper">
-        
-        
-    </div>
+  <div id="login">
+    <form action="javascript:void(0);">
+      <h1>MUR D'HUMEUR POUR BOM</h1>
+      <div id="error"></div>
+      <input placeholder="Username" type="text" required="" id="username">
+      <input placeholder="Password" type="password" required="" id="password">
+      <input placeholder="Plateforme BOM" type="text" required="" id="platform">
+      <button onclick="getToken()">Submit</button>
+    </form>
+  </div>
+  <div class="wrapper" id="wrapper">      
+  </div>
   <script src="jwt-vanilla.js"></script>
 </body>
 </html>

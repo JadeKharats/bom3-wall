@@ -1,12 +1,18 @@
-// make the request to the login endpoint
 function getToken() {
-    var loginUrl = "https://beta-bom3.herokuapp.com/api/sign_ins"
+
     var xhr = new XMLHttpRequest();
     var userElement = document.getElementById('username');
     var passwordElement = document.getElementById('password');
-    var tokenElement = document.getElementById('token');
+    var platformElement = document.getElementById('platform');
+    var errorElement = document.getElementById('error');
+    var loginElement = document.getElementById('login');
     var user = userElement.value;
     var password = passwordElement.value;
+    var platform = platformElement.value;
+
+    localStorage.setItem('bom_url', platform);
+
+    var loginUrl = platform + "/api/sign_ins"
   
     xhr.open('POST', loginUrl, true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -14,11 +20,12 @@ function getToken() {
       var responseObject = JSON.parse(this.response);
       console.log(responseObject);
       if (responseObject.token) {
-        tokenElement.innerHTML = "Token received";
         localStorage.setItem('token', responseObject.token);
-        setInterval(getMoods, 3000)
+        loginElement.classList.add("hidden");
+        // getMoods();
+        setInterval(getMoods, 3000);        
       } else {
-        tokenElement.innerHTML = "No token received";
+        errorElement.innerHTML = "No token received";
       }
     });
   
@@ -32,12 +39,11 @@ function getToken() {
 
 function getMoods() {
 
-    var url = "https://beta-bom3.herokuapp.com/api/moods"
+    var MoodUrl = localStorage.getItem('bom_url') + "/api/moods"
     var xhr = new XMLHttpRequest();
-    var resultElement = document.getElementById('result');
     var wrapperElement = document.getElementById('wrapper');
     
-    xhr.open('GET', url, true);
+    xhr.open('GET', MoodUrl, true);
     xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'));
     xhr.addEventListener('load', function() {
       var responseObject = JSON.parse(this.response);
@@ -61,6 +67,7 @@ function getMoods() {
     var user = document.createElement("h4");
     var comment = document.createElement("p");
 
+    box.classList.add("box");
     box.classList.add("box" + item.level);
     card.classList.add("card");
     content.classList.add("content");
@@ -70,8 +77,7 @@ function getMoods() {
 
     content.appendChild(user);
     content.appendChild(comment);
-    card.appendChild(content);
-    box.appendChild(card);
+    box.appendChild(content);
 
     wrapperElement.insertBefore(box, wrapperElement.firstChild);  
   }
