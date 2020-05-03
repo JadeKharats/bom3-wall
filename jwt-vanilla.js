@@ -46,13 +46,34 @@ function clearWrapper() {
   wrapperElement.innerHTML="";
 }
 
+function stopReload(){
+  clearInterval(window.interval);
+}
+
 function autoReload(){
   stopReload();
   window.interval = setInterval(getMoods, 3000);
 }
 
-function stopReload(){
-  clearInterval(window.interval);
+function addTimeCard(item) {
+  var wrapperElement = document.getElementById("wrapper");
+  var box = document.createElement("div");
+  var content = document.createElement("div");
+  var user = document.createElement("h4");
+  var comment = document.createElement("p");
+
+  box.classList.add("box");
+  box.classList.add("box" + item.level);
+  content.classList.add("content");
+
+  user.textContent = item.user;
+  comment.textContent = item.comment;
+
+  content.appendChild(user);
+  content.appendChild(comment);
+  box.appendChild(content);
+
+  wrapperElement.insertBefore(box, wrapperElement.firstChild);  
 }
 
 
@@ -87,23 +108,4 @@ function getMoods() {
 }
 
 
-  function addTimeCard(item) {
-    var wrapperElement = document.getElementById("wrapper");
-    var box = document.createElement("div");
-    var content = document.createElement("div");
-    var user = document.createElement("h4");
-    var comment = document.createElement("p");
-
-    box.classList.add("box");
-    box.classList.add("box" + item.level);
-    content.classList.add("content");
-
-    user.textContent = item.user;
-    comment.textContent = item.comment;
-
-    content.appendChild(user);
-    content.appendChild(comment);
-    box.appendChild(content);
-
-    wrapperElement.insertBefore(box, wrapperElement.firstChild);  
-  }
+  
