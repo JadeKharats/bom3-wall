@@ -1,59 +1,5 @@
 var interval;
 
-function login() {
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', getLoginUrl(), true);
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-  xhr.addEventListener('load', function() {
-    var responseObject = JSON.parse(this.response);
-    if (responseObject.token) {
-      successLogin(responseObject.token);        
-    } else {
-      failLogin();      
-    }
-  });
-  var sendObject = jsonLoginObject();
-  xhr.send(sendObject);
-}
-
-function getMoods() {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', getMoodsUrl(), true);
-  xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'));
-  xhr.addEventListener('load', function() {
-    var responseObject = JSON.parse(this.response);
-    clearWrapper();
-    responseObject.forEach(function(item,i){
-      addTimeCard(item);
-    });
-  });  
-  xhr.send();
-}
-
-
-  function addTimeCard(item) {
-    var wrapperElement = document.getElementById('wrapper');
-    var box = document.createElement("div");
-    var content = document.createElement("div");
-    var user = document.createElement("h4");
-    var comment = document.createElement("p");
-
-    box.classList.add("box");
-    box.classList.add("box" + item.level);
-    content.classList.add("content");
-
-    user.textContent = item.user;
-    comment.textContent = item.comment;
-
-    content.appendChild(user);
-    content.appendChild(comment);
-    box.appendChild(content);
-
-    wrapperElement.insertBefore(box, wrapperElement.firstChild);  
-  }
-
-// Post Refacto , function with 10 lines max
-
 function logout(){
   localStorage.clear();
   location.reload();
@@ -108,3 +54,56 @@ function autoReload(){
 function stopReload(){
   clearInterval(window.interval);
 }
+
+
+function login() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', getLoginUrl(), true);
+  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+  xhr.addEventListener('load', function() {
+    var responseObject = JSON.parse(this.response);
+    if (responseObject.token) {
+      successLogin(responseObject.token);        
+    } else {
+      failLogin();      
+    }
+  });
+  var sendObject = jsonLoginObject();
+  xhr.send(sendObject);
+}
+
+function getMoods() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', getMoodsUrl(), true);
+  xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'));
+  xhr.addEventListener('load', function() {
+    var responseObject = JSON.parse(this.response);
+    clearWrapper();
+    responseObject.forEach(function(item,i){
+      addTimeCard(item);
+    });
+  });  
+  xhr.send();
+}
+
+
+  function addTimeCard(item) {
+    var wrapperElement = document.getElementById('wrapper');
+    var box = document.createElement("div");
+    var content = document.createElement("div");
+    var user = document.createElement("h4");
+    var comment = document.createElement("p");
+
+    box.classList.add("box");
+    box.classList.add("box" + item.level);
+    content.classList.add("content");
+
+    user.textContent = item.user;
+    comment.textContent = item.comment;
+
+    content.appendChild(user);
+    content.appendChild(comment);
+    box.appendChild(content);
+
+    wrapperElement.insertBefore(box, wrapperElement.firstChild);  
+  }
