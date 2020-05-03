@@ -141,3 +141,8 @@ button:hover {
   width: 100%;
   margin: 15px auto;
 }
+
+.error{
+  margin: 25px;
+  color: red;
+}
