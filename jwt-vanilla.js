@@ -8,8 +8,10 @@ function logout(){
 function hiddenLogin() {
   var loginElement = document.getElementById("login");
   var logoutElement = document.getElementById("logout");
+  var password = document.getElementById("password").value;
   loginElement.classList.add("hidden");
   logoutElement.classList.remove("hidden");
+  document.getElementById("password").value = "";
 }
 
 function successLogin(token) {
@@ -37,7 +39,6 @@ function errorLogin() {
 function jsonLoginObject(){
   var user = document.getElementById("username").value;
   var password = document.getElementById("password").value;
-  document.getElementById("password").value = "";
   return JSON.stringify({user:{email: user, password: password}});
 }
 
