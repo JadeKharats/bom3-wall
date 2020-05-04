@@ -14,8 +14,14 @@ function hiddenLogin() {
 
 function successLogin(token) {
   localStorage.setItem("token", token);
-  hiddenLogin();
+  wipLogin();
   getMoods();
+  hiddenLogin();
+}
+
+function wipLogin() {
+  var errorElement = document.getElementById("error");
+  errorElement.innerHTML = "Accès plateforme en cours";
 }
 
 function failLogin() {
